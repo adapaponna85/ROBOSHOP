@@ -36,7 +36,7 @@ VALIDATE $? "Installing MONGODB"
 systemctl enable mongod &>> $Logfile
 VALDIATE $? "Enabling MONGODB"
 
-systemctl start mongod &>> $Logile
+systemctl start mongod &>> $Logfile
 VALIDATE $? "Starting MONGODB"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $Logfile
