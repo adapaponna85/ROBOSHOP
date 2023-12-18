@@ -12,19 +12,19 @@ VALIDATE()
 {
     if [ $? -ne 0 ]
     then
-    echo -e "$R $2 Error $N"
+    echo -e "$2 $R Error $N"
     exit 1
     else
-    echo -e "$G $2 Success $N"
+    echo -e "$2 $G Success $N"
     fi
 }
 
 if [ $user -ne 0 ]
 then
-echo -e " $R Unauthorized user! Please login as root user to proceed.. $N"
+echo -e "$R Unauthorized user! Please login as root user to proceed.. $N"
 exit 1
 else
-echo -e " $G Authorized user! Proceeding.. $N"
+echo -e "$G Authorized user! Proceeding.. $N"
 fi
 
 cp mongo.repo /etc/yum.repos.d/ &>> Logfile
