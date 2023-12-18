@@ -27,21 +27,21 @@ else
 echo -e "$G Authorized user! Proceeding.. $N"
 fi
 
-cp mongo.repo /etc/yum.repos.d/ &>> Logfile
+cp mongo.repo /etc/yum.repos.d/ &>> $Logfile
 VALIDATE $? "Copying mongo.repo file"
 
-dnf install mongodb-org -y &>> Logfile
+dnf install mongodb-org -y &>> $Logfile
 VALIDATE $? "Installing MONGODB"
 
-systemctl enable mongod &>> Logfile
+systemctl enable mongod &>> $Logfile
 VALDIATE $? "Enabling MONGODB"
 
-systemctl start mongod &>> Logile
+systemctl start mongod &>> $Logile
 VALIDATE $? "Starting MONGODB"
 
-sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mongod.conf &>> Logfile
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $Logfile
 VALIDATE $? "Remote Access to MONGODB" 
 
-systemctl restart mongod &>> Logfile
+systemctl restart mongod &>> $Logfile
 VALIDATE $? "Restarting MONGODB"
 
