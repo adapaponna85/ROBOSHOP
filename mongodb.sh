@@ -8,10 +8,10 @@ N="e\[0m"
 Timestamp=$(date +%F-$H-$M-$S")
 Logfile="($0-$Timestamp.log)"
 
-if [ $? -ne 0 ]
+if [ $user -ne 0 ]
 then
-echo -e "$R Unauthorized user! Please login as root user to proceed.. $N"
+echo -e " $R Unauthorized user! Please login as root user to proceed.. $N "
 else
-echo -e "$G Authorized user! Proceeding.. $N"
+echo -e " $G Authorized user! Proceeding.. $N  "
 fi
 
