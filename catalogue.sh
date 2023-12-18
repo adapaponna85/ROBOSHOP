@@ -4,7 +4,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 
-MongoDB_Host=mongodb.apdevops.online
+MONGODB_Host=mongodb.apdevops.online
 Timestamp=$(date +%F-%H-%M-%S)
 Logfile="/tmp/$0-$Timestamp.log"
 
