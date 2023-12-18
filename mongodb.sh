@@ -22,6 +22,7 @@ VALIDATE()
 if [ $user -ne 0 ]
 then
 echo -e " $R Unauthorized user! Please login as root user to proceed.. $N"
+exit 1
 else
 echo -e " $G Authorized user! Proceeding.. $N"
 fi
