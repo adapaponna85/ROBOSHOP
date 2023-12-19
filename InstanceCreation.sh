@@ -14,6 +14,6 @@ Instance_Type="t3.small"
 else
 Instance_Type="t2.micro"
 fi
-aws ec2 run-instances --image-id $AMI  --instance-type $Instance_Type  --security-group-ids $SG_ID --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$i}]' 
+aws ec2 run-instances --image-id $AMI  --instance-type $Instance_Type  --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]"
 
 done
