@@ -2,6 +2,8 @@
 
 AMI=ami-03265a0778a880afb
 SG_ID=sg-01833f2b4eac3f880
+Domain_Name=apdevops.online
+ZoneID=Z065870818Z8MZGR1456S
 
 Instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
 
@@ -19,4 +21,23 @@ IP_Address=$(aws ec2 run-instances --image-id $AMI  --instance-type $Instance_Ty
 
 echo " $i : $IP_Address"
 
+#Create Route53 records, make sure deleting existing records.
+aws route53 change-resource-record-sets \
+  --hosted-zone-id $ZoneID \
+  --change-batch "
+  {
+    "Comment": "Testing creating a record set"
+    ,"Changes": [{
+      "Action"              : "CREATE"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "$i.$Domain_Name"
+        ,"Type"             : "A"
+        ,"TTL"              : 1
+        ,"ResourceRecords"  : [{
+            "Value"         : "$IP_Address"
+        }]
+      }
+    }]
+  }
+"
 done
