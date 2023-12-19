@@ -26,19 +26,22 @@ VALIDATE()
     fi 
 }
 
-dnf module disable mysql -y
+dnf module disable mysql -y  &>> $Logfile
 VALIDATE $? "Disabling current mysql version"
 
-cp mysql.repo  /etc/yum.repos.d/mysql.repo
+cp mysql.repo  /etc/yum.repos.d/mysql.repo  &>> $Logfile
 VALIDATE $? "Copying MySQL repo"
 
-systemctl enable mysqld
+dnf install mysql-community-server -y  &>> $Logfile
+VALIDATE $? "Installing MYSQL"
+
+systemctl enable mysqld  &>> $Logfile
 VALIDATE $? "Enabling MySQL Server"
 
-systemctl start mysqld
+systemctl start mysqld  &>> $Logfile
 VALIDATE $? "Starting MySQL Server"
 
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass RoboShop@1  &>> $Logfile
 VALIDATE $? "Setting MySQL Root password"
 
 
