@@ -8,12 +8,14 @@ Instances=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 for i in "${Instances[@]}"
 do
 echo "Instance is : $i"
-if [ $i == "mongodb" ] || [ $i == "mysql" ] || [ $i == "shipping" ]
-then
-Instance_Type="t3.small"
-else
-Instance_Type="t2.micro"
-fi
-aws ec2 run-instances --image-id $AMI  --instance-type $Instance_Type  --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text
+    if [ $i == "mongodb" ] || [ $i == "mysql" ] || [ $i == "shipping" ]
+    then
+      Instance_Type="t3.small"
+    else
+      Instance_Type="t2.micro"
+    fi
+IP_Adress=$(aws ec2 run-instances --image-id $AMI  --instance-type $Instance_Type  --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+
+echo " $i : $IP_Address"
 
 done
