@@ -28,25 +28,25 @@ VALIDATE()
     fi 
 }
 
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y  &>> $Logfile
 VALIDATE $? "Installing remi release"
 
-dnf module enable redis:remi-6.2 -y
+dnf module enable redis:remi-6.2 -y  &>> $Logfile
 VALIDATE $? "Enabling redis"
 
-dnf install redis -y
+dnf install redis -y  &>> $Logfile
 VALIDATE $? "Installing redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf 
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf  &>> $Logfile
 VALIDATE $? "Allowing remote connections"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf  &>> $Logfile
 VALIDATE $? "Allowing remote connections"
 
-systemctl enable redis
+systemctl enable redis  &>> $Logfile
 VALIDATE $? "Enabled redis"
 
-systemctl start redis
+systemctl start redis  &>> $Logfile
 VALIDATE $? "Started redis"
 
 
